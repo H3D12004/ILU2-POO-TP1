@@ -2,6 +2,7 @@ package villagegaulois;
 
 import personnages.Chef;
 import personnages.Gaulois;
+import src.villagegaulois.Etal;
 
 public class Village {
 	private String nom;
@@ -32,17 +33,17 @@ public class Village {
 		}
 	}
 	
-	public class Marche {
+	private static class Marche {
         private Etal[] etals;
 
-        public Marche(int nombreEtals) {
+        private Marche(int nombreEtals) {
             etals = new Etal[nombreEtals];
             for (int i = 0; i < etals.length; i++) {
                 etals[i] = new Etal();
             }
         }
         
-        public void utiliserEtal(int indiceEtal, Gaulois vendeur, String produit, int nbProduit) {
+        private void utiliserEtal(int indiceEtal, Gaulois vendeur, String produit, int nbProduit) {
             if (indiceEtal >= 0 && indiceEtal < etals.length) {
                 etals[indiceEtal].occuperEtal(vendeur, produit, nbProduit);
             } else {
@@ -50,7 +51,7 @@ public class Village {
             }
         }
         
-        public int trouverEtalLibre() {
+        private int trouverEtalLibre() {
             for (int i = 0; i < etals.length; i++) {
                 if (!etals[i].isEtalOccupe()) {
                     return i;
@@ -59,7 +60,7 @@ public class Village {
             return -1;
         }
         
-        public Etal[] trouverEtals(String produit) {
+        private Etal[] trouverEtals(String produit) {
             int compteur = 0;
 
             for (Etal etal : etals) {
@@ -80,7 +81,7 @@ public class Village {
             return etalsVendantProduit;
         }
         
-        public Etal trouverVendeur(Gaulois gaulois) {
+        private Etal trouverVendeur(Gaulois gaulois) {
             for (Etal etal : etals) {
                 if (etal.isEtalOccupe() && etal.getVendeur().equals(gaulois)) {
                     return etal;
@@ -89,7 +90,7 @@ public class Village {
             return null;
         }
         
-        public String afficherMarche() {
+        private String afficherMarche() {
             StringBuilder resultat = new StringBuilder();
             int nbEtalVide = 0;
 
